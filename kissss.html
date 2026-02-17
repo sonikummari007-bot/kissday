@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Nisuuuu 💋</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg1:#ffd7e2;
+  --bg2:#f8a6bd;
+  --glass: rgba(255,255,255,.18);
+  --shadow: 0 18px 45px rgba(0,0,0,.22);
+  --hot:#ff3b6a;
+  --hot2:#ff6f95;
+}
+
+body{
+  margin:0;
+  font-family:Poppins;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:white;
+  text-align:center;
+}
+
+/* HERO */
+.hero{
+  padding:30px;
+  backdrop-filter:blur(12px);
+}
+
+h1{
+  font-family:'Great Vibes';
+  font-size:70px;
+}
+
+/* BUTTON */
+button{
+  background:linear-gradient(135deg,var(--hot),var(--hot2));
+  border:none;
+  padding:14px 22px;
+  color:white;
+  border-radius:30px;
+  cursor:pointer;
+  margin:10px;
+}
+
+/* MEMORY WALL */
+.memoryCard{
+  margin:40px auto;
+  width:90%;
+  display:flex;
+  gap:25px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.polaroid{
+  background:white;
+  color:black;
+  border-radius:18px;
+  padding:12px;
+  width:280px;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+  transform:rotate(-2deg);
+  transition:.3s;
+}
+
+.polaroid:hover{
+  transform:rotate(0deg) scale(1.03);
+}
+
+/* IMPORTANT FIX — NO MORE CROPPING */
+.polaroid img{
+  width:100%;
+  height:340px;
+  object-fit:contain;
+  background:white;
+  border-radius:12px;
+  padding:6px;
+}
+
+/* PAGE SWITCH */
+.page{display:none;}
+.active{display:block;}
+
+/* HEARTBEAT PHOTO */
+.bigPhoto img{
+  width:100%;
+  max-width:500px;
+  border-radius:20px;
+  animation:heartbeat 2s infinite;
+}
+
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.03)}
+  100%{transform:scale(1)}
+}
+
+/* KISS STAMP */
+.stamp{
+  position:absolute;
+  font-size:40px;
+  animation:fade 1.6s forwards;
+}
+@keyframes fade{
+  from{opacity:1;transform:scale(1)}
+  to{opacity:0;transform:scale(1.8)}
+}
+
+/* KISS RAIN */
+.kissDrop{
+  position:fixed;
+  top:-20px;
+  animation:fall 3s linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="home">
+<div class="hero">
+<h1>Happy Kiss Day Nisuuuu 💋</h1>
+<button onclick="kiss()">Tap for a Kiss</button>
+<button onclick="openHeart()">Open My Heart</button>
+</div>
+
+<div class="memoryCard">
+
+<div class="polaroid">
+<img src="photo1.jpg">
+<p>our first photo 💗</p>
+</div>
+
+<div class="polaroid">
+<img src="photo2.jpg">
+<p>our cutuuuu moment ✨</p>
+</div>
+
+<div class="polaroid">
+<img src="photo3.jpg">
+<p>still miss this day 💞</p>
+</div>
+
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="heart">
+
+<h1>For You 💌</h1>
+
+<div class="bigPhoto" onclick="stamp(event)" style="position:relative;">
+<img src="main.jpg">
+</div>
+
+<p id="letter"></p>
+<button onclick="goBack()">Back</button>
+
+</div>
+
+<script>
+
+/* kiss rain */
+function kiss(){
+for(let i=0;i<40;i++){
+let k=document.createElement("div");
+k.innerText="💋";
+k.className="kissDrop";
+k.style.left=Math.random()*100+"vw";
+k.style.fontSize=(20+Math.random()*25)+"px";
+document.body.appendChild(k);
+setTimeout(()=>k.remove(),3000);
+}
+}
+
+/* switch pages */
+function openHeart(){
+document.getElementById("home").classList.remove("active");
+document.getElementById("heart").classList.add("active");
+typeLetter();
+}
+
+function goBack(){
+document.getElementById("heart").classList.remove("active");
+document.getElementById("home").classList.add("active");
+}
+
+/* kiss stamp */
+function stamp(e){
+let s=document.createElement("div");
+s.innerText="💋";
+s.className="stamp";
+s.style.left=e.offsetX+"px";
+s.style.top=e.offsetY+"px";
+e.currentTarget.appendChild(s);
+setTimeout(()=>s.remove(),1500);
+}
+
+/* typing letter */
+const text=`Happy kiss day my jaan 💋
+I love you so much.
+One day I'll give you all these kisses for real 😚
+— Pranay ❤️`;
+
+let i=0;
+function typeLetter(){
+let box=document.getElementById("letter");
+if(box.innerHTML!="")return;
+let t=setInterval(()=>{
+box.innerHTML+=text[i];
+i++;
+if(i>=text.length)clearInterval(t);
+},40);
+}
+
+</script>
+
+</body>
+</html>
